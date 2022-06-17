@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="product_price" inherit_id="website_sale.product_price">
+        <xpath expr="//span[hasclass('oe_price')]" position="after">
+            <span class="vatsuffix font-weight-normal small"/>            
+        </xpath>
+        <xpath expr="//h3[last()]" position="after">
+            <div class="vatextrainfo">
+                Price for items sold include VAT. Depending on your delivery address, VAT may vary at Checkout. <a href="#">Read more</a>
+                <span class="exclvat o_not_editable"/>
+            </div>            
+        </xpath>        
+    </template>
+
+</odoo>

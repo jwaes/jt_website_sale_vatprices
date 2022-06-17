@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_jt_website_sale_vatprices_jt_website_sale_vatprices,jt_website_sale_vatprices.jt_website_sale_vatprices,model_jt_website_sale_vatprices_jt_website_sale_vatprices,base.group_user,1,1,1,1
