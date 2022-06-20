@@ -30,6 +30,22 @@ odoo.define('jt_website_sale_vatprices.VariantMixin', function (require) {
      * @param {Array} combination
      */
     VariantMixin._onChangeCombinationStock = function (ev, $parent, combination) {
+
+        const $pricePerUom = $parent.find(".vatextrainfo .oe_currency_value");
+        console.log("here")
+        console.log($pricePerUom)
+        if ($pricePerUom) {
+            if (combination.is_combination_possible !== false && combination.total_excluded != 0) {
+                $pricePerUom.parents(".o_base_unit_price_wrapper").removeClass("d-none");
+                $pricePerUom.text(this._priceToStr(combination.total_excluded));
+                $parent.find(".oe_custom_base_unit:first").text(combination.base_unit_name);
+            } else {
+                $pricePerUom.parents(".o_base_unit_price_wrapper").addClass("d-none");
+            }
+        }
+
+
+
         let product_id = 0;
         // needed for list view of variants
         if ($parent.find('input.product_id:checked').length) {
@@ -53,11 +69,14 @@ odoo.define('jt_website_sale_vatprices.VariantMixin', function (require) {
                 combination
             ));
             $('span.vatsuffix').html($vatsuffix);
-            const $exclvat = $(QWeb.render(
-                'jt_website_sale_vatprices.exclvat',
-                combination
-            ));
-            $('span.exclvat').html($exclvat);            
+            // const $exclvat = $(QWeb.render(
+            //     'jt_website_sale_vatprices.exclvat',
+            //     combination
+            // ));
+            // $('span.exclvat').html($exclvat);
+            if(!combination.hastax){
+                $('div.vatextrainfo').hide();
+            }
         });
     };
     
