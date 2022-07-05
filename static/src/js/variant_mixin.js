@@ -29,7 +29,7 @@ odoo.define('jt_website_sale_vatprices.VariantMixin', function (require) {
      * @param {$.Element} $parent
      * @param {Array} combination
      */
-    VariantMixin._onChangeCombinationStock = function (ev, $parent, combination) {
+    VariantMixin._onChangeCombinationVAT = function (ev, $parent, combination) {
 
         const $pricePerUom = $parent.find(".vatextrainfo .oe_currency_value");
         console.log("here")
@@ -43,8 +43,6 @@ odoo.define('jt_website_sale_vatprices.VariantMixin', function (require) {
                 $pricePerUom.parents(".o_base_unit_price_wrapper").addClass("d-none");
             }
         }
-
-
 
         let product_id = 0;
         // needed for list view of variants
@@ -87,19 +85,9 @@ odoo.define('jt_website_sale_vatprices.VariantMixin', function (require) {
          */
         _onChangeCombination: function () {
             this._super.apply(this, arguments);
-            VariantMixin._onChangeCombinationStock.apply(this, arguments);
+            VariantMixin._onChangeCombinationVAT.apply(this, arguments);
         },
-        /**
-         * Recomputes the combination after adding a product to the cart
-         * @override
-         */
-        _onClickAdd(ev) {
-            return this._super.apply(this, arguments).then(() => {
-                if ($('div.availability_messages').length) {
-                    this._getCombinationInfo(ev);
-                }
-            });
-        }
+
     });
     
     return VariantMixin;
