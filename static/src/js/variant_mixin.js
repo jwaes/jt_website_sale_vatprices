@@ -32,8 +32,7 @@ odoo.define('jt_website_sale_vatprices.VariantMixin', function (require) {
     VariantMixin._onChangeCombinationVAT = function (ev, $parent, combination) {
 
         const $pricePerUom = $parent.find(".vatextrainfo .oe_currency_value");
-        console.log("here")
-        console.log($pricePerUom)
+
         if ($pricePerUom) {
             if (combination.is_combination_possible !== false && combination.total_excluded != 0) {
                 $pricePerUom.parents(".o_base_unit_price_wrapper").removeClass("d-none");
@@ -58,8 +57,6 @@ odoo.define('jt_website_sale_vatprices.VariantMixin', function (require) {
         if (!this.isWebsite || !isMainProduct) {
             return;
         }
-        
-        console.log('vatinfo ready')
 
         loadXml().then(function (result) {
             const $vatsuffix = $(QWeb.render(
