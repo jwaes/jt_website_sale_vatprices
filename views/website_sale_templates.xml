@@ -14,7 +14,7 @@
                     (<span class="" t-if="combination_info['total_excluded']" t-esc="combination_info['total_excluded']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
                     <span class="font-weight-normal o_not_editable">excl. VAT</span>)
                 </div>                
-                <span class="vatincl_info">Price for items sold include VAT. Depending on your delivery address, VAT may vary at checkout. <a href="#">Read more</a></span>
+                <span class="vatincl_info">Price for items sold include VAT. Depending on your delivery address, VAT may vary at checkout. <a href="/faq#OSS">Read more</a></span>
                 <span class="exclvat o_not_editable"/>
             </div>            
         </xpath>        
