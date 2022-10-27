@@ -5,14 +5,14 @@
         <t t-if="hastax">
             <span>
                 <t t-if="tax_display == 'total_included'">
-                    incl!.
+                    incl.
                 </t>                
-                <span t-if="tax_display == 'total_included'" t-esc="applied_tax" class="bg-danger"/> 
+                <span t-if="tax_display == 'total_included'" t-esc="applied_tax"/> 
                 <t t-if="tax_display == 'total_excluded'">
-                    excl!.
+                    excl.
                 </t>                
             </span>
-            <span>VAT!!</span>
+            <span>VAT</span>
         </t>
     </t>
 
