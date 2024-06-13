@@ -22,7 +22,7 @@ class ProductTemplate(models.Model):
         if self.env.context.get('website_id'):
             current_website = self.env['website'].get_current_website()
             if not pricelist:
-                pricelist = current_website.get_current_pricelist()
+                pricelist = current_website._get_current_pricelist()
 
         combination_info = super(ProductTemplate, self)._get_combination_info(
             combination=combination, 
