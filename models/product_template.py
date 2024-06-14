@@ -31,10 +31,12 @@ class ProductTemplate(models.Model):
             parent_combination=parent_combination,
              only_template=only_template)
 
+        pricelist = current_website.pricelist_id
+
         if self.env.context.get('website_id'):
             context = dict(self.env.context, ** {
                 'quantity': self.env.context.get('quantity', add_qty),
-                'pricelist': current_website.pricelist_id.id
+                'pricelist': pricelist.id
             })
 
             product = (self.env['product.product'].browse(combination_info['product_id']) or self).with_context(context)
