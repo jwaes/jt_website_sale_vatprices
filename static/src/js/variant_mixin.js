@@ -38,10 +38,13 @@ VariantMixin._onChangeCombinationVAT = function (ev, $parent, combination) {
     if (!this.isWebsite || !isMainProduct) {
         return;
     }
-    $('span.vatsuffix').html(renderToFragment(
+    console.log('changing')
+    console.log(combination)
+    test = $('span.vatsuffix').html(renderToFragment(
         'jt_website_sale_vatprices.vatsuffix',
         combination
     ));
+    console.log(test)
     if (!combination.hastax) {
         $('div.vatextrainfo').hide();
     }
