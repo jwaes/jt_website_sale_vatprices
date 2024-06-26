@@ -48,7 +48,9 @@ class ProductTemplate(models.Model):
             # The list_price is always the price of one.
             quantity_1 = 1.0
             # list_price = product._price_compute('list_price')[product.id]
-            product_price_unit = product.with_company(company_id).lst_price
+            # product_price_unit = product.price if pricelist else list_price
+            
+            product_price_unit = pricelist._get_product_price(product, currency=pricelist.currency_id, quantity=quantity_1)
             _logger.info('product_price_unit ' + str(product_price_unit))
             # price = product.price if pricelist else list_price
             all_prices = taxes.compute_all(product_price_unit, currency=pricelist.currency_id, quantity=quantity_1, product=product, partner=partner)
