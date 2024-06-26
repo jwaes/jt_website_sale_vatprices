@@ -53,15 +53,15 @@ class ProductTemplate(models.Model):
             all_prices = taxes.compute_all(product_price_unit, currency=pricelist.currency_id, quantity=quantity_1, product=product, partner=partner)
 
             price_untaxed = taxes.compute_all(
-                                lst_price,
-                                currency,
-                                1,
+                                product_price_unit,
+                                currency_id,
+                                quantity_1,
                                 handle_price_include=True,
                             )['total_excluded']
             price_taxed = taxes.compute_all(
                                 price_untaxed,
-                                currency,
-                                1,
+                                currency_id,
+                                quantity_1,
                                 handle_price_include=False,
                             )['total_included']                            
 
