@@ -34,10 +34,14 @@ class ProductTemplate(models.Model):
 
             tax_display = self.user_has_groups('account.group_show_line_subtotals_tax_excluded') and 'total_excluded' or 'total_included'
             _logger.info('tax_display  ' + tax_display)
+            _logger.info('partner '+ partner.name)
             fpos = self.env['account.fiscal.position'].sudo()._get_fiscal_position(partner)
-            _logger.info('fiscal position ' + fpos.name)
+            if fpos:
+                _logger.info('fiscal position ' + fpos.name)
+            else:
+                _logger.info('fiscal position: false')
             product_taxes = product.sudo().taxes_id.filtered(lambda x: x.company_id == company_id)
-            _logger.info('product_taxesn ' + product_taxes.name)
+            _logger.info('product_taxes ' + product_taxes.name)
             taxes = fpos.map_tax(product_taxes)
             _logger.info('taxes ' + taxes.name)
 
