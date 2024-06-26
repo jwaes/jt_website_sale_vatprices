@@ -66,6 +66,5 @@ class ProductTemplate(models.Model):
                 'tax_display': tax_display,
                 'applied_tax': applied_tax,
             })
-            _logger.info("combi info + " + combination_info)
 
         return combination_info
