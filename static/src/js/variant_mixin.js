@@ -2,13 +2,8 @@
 
 import VariantMixin from "@website_sale/js/variant_mixin";
 import { renderToFragment } from "@web/core/utils/render";
-import "@website_sale/js/website_sale";
-import { markup } from "@odoo/owl";
 
 const originalOnChangeCombination = VariantMixin._onChangeCombination;
-
-
-
 
 VariantMixin._onChangeCombinationVAT = function (ev, $parent, combination) {
 
@@ -40,7 +35,7 @@ VariantMixin._onChangeCombinationVAT = function (ev, $parent, combination) {
     }
     console.log('changing')
     console.log(combination)
-    test = $('span.vatsuffix').html(renderToFragment(
+    test = $('span.vatsuffix').append(renderToFragment(
         'jt_website_sale_vatprices.vatsuffix',
         combination
     ));
