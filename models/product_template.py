@@ -7,22 +7,22 @@ class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
     def _get_combination_info(self, combination=False, product_id=False, add_qty=1, parent_combination=False, only_template=False):
-        # combination_info = super(ProductTemplate, self)._get_combination_info(
-        #     combination=combination,
-        #     product_id=product_id,
-        #     add_qty=add_qty,
-        #     pricelist=pricelist,
-        #     parent_combination=parent_combination,
-        #     only_template=only_template,
-        # )
+        combination_info = super(ProductTemplate, self)._get_combination_info(
+            combination=combination,
+            product_id=product_id,
+            add_qty=add_qty,
+            pricelist=pricelist,
+            parent_combination=parent_combination,
+            only_template=only_template,
+        )
         self.ensure_one()
 
         current_website = self.env['website'].get_current_website().with_context(self.env.context)
 
-        # if self.env.context.get('website_id'):
-        #     current_website = self.env['website'].get_current_website()
-        #     if not pricelist:
-        #         pricelist = current_website._get_current_pricelist()
+        if self.env.context.get('website_id'):
+            current_website = self.env['website'].get_current_website()
+            if not pricelist:
+                pricelist = current_website._get_current_pricelist()
 
         combination_info = super(ProductTemplate, self)._get_combination_info(
             combination=combination, 
