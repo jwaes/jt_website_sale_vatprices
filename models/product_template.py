@@ -53,6 +53,8 @@ class ProductTemplate(models.Model):
 
             total_excluded = all_prices['total_excluded']
             total_included = all_prices['total_included']
+            _logger.info('total_excluded ' + total_excluded)
+            _logger.info('total_included ' + total_included)
 
             applied_tax = ""
             if all_prices['taxes'] and all_prices['taxes'][0]:
@@ -60,7 +62,8 @@ class ProductTemplate(models.Model):
 
             hastax = False
             if product.taxes_id:
-                hastax = True            
+                hastax = True     
+                _logger.info('hastax !')                  
 
             combination_info.update({
                 'hastax': hastax,
