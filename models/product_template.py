@@ -46,13 +46,35 @@ class ProductTemplate(models.Model):
             _logger.info('taxes ' + taxes.name)
 
             # The list_price is always the price of one.
-            quantity_1 = 1
-            list_price = product._price_compute('list_price')[product.id]
+            quantity_1 = 1.0
+            # list_price = product._price_compute('list_price')[product.id]
+            product_price_unit = product.with_company(company_id).lst_price
             # price = product.price if pricelist else list_price
-            all_prices = taxes.compute_all(list_price, pricelist.currency_id, quantity_1, product, partner)
+            all_prices = taxes.compute_all(product_price_unit, currency=pricelist.currency_id, quantity=quantity_1, product=product, partner=partner)
+
+            price_untaxed = taxes.compute_all(
+                                lst_price,
+                                currency,
+                                1,
+                                handle_price_include=True,
+                            )['total_excluded']
+            price_taxed = taxes.compute_all(
+                                price_untaxed,
+                                currency,
+                                1,
+                                handle_price_include=False,
+                            )['total_included']                            
+
 
             total_excluded = all_prices['total_excluded']
             total_included = all_prices['total_included']
+
+            _logger.info('total_excluded ' + str(total_excluded))
+            _logger.info('total_included ' + str(total_included))
+
+            total_excluded = price_untaxed
+            total_included = price_taxed    
+
             _logger.info('total_excluded ' + str(total_excluded))
             _logger.info('total_included ' + str(total_included))
 
