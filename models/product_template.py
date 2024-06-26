@@ -53,8 +53,8 @@ class ProductTemplate(models.Model):
 
             total_excluded = all_prices['total_excluded']
             total_included = all_prices['total_included']
-            _logger.info('total_excluded ' + total_excluded)
-            _logger.info('total_included ' + total_included)
+            _logger.info('total_excluded ' + str(total_excluded))
+            _logger.info('total_included ' + str(total_included))
 
             applied_tax = ""
             if all_prices['taxes'] and all_prices['taxes'][0]:
