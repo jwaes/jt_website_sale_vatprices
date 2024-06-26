@@ -35,11 +35,11 @@ class ProductTemplate(models.Model):
             tax_display = self.user_has_groups('account.group_show_line_subtotals_tax_excluded') and 'total_excluded' or 'total_included'
             _logger.info('tax_display  ' + tax_display)
             fpos = self.env['account.fiscal.position'].sudo()._get_fiscal_position(partner)
-            _logger.info('fiscal position ' + fpos)
+            _logger.info('fiscal position ' + fpos.name)
             product_taxes = product.sudo().taxes_id.filtered(lambda x: x.company_id == company_id)
-            _logger.info('product_taxesn ' + product_taxes)
+            _logger.info('product_taxesn ' + product_taxes.name)
             taxes = fpos.map_tax(product_taxes)
-            _logger.info('taxes ' + taxes)
+            _logger.info('taxes ' + taxes.name)
 
             # The list_price is always the price of one.
             quantity_1 = 1
