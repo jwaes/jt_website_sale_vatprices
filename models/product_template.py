@@ -55,31 +55,31 @@ class ProductTemplate(models.Model):
             # price = product.price if pricelist else list_price
             all_prices = taxes.compute_all(product_price_unit, currency=pricelist.currency_id, quantity=quantity_1, product=product, partner=partner)
 
-            price_untaxed = taxes.compute_all(
-                                product_price_unit,
-                                pricelist.currency_id,
-                                quantity_1,
-                                handle_price_include=True,
-                            )['total_excluded']
-            price_taxed = taxes.compute_all(
-                                price_untaxed,
-                                pricelist.currency_id,
-                                quantity_1,
-                                handle_price_include=False,
-                            )['total_included']                            
+            # price_untaxed = taxes.compute_all(
+            #                     product_price_unit,
+            #                     pricelist.currency_id,
+            #                     quantity_1,
+            #                     handle_price_include=True,
+            #                 )['total_excluded']
+            # price_taxed = taxes.compute_all(
+            #                     price_untaxed,
+            #                     pricelist.currency_id,
+            #                     quantity_1,
+            #                     handle_price_include=False,
+            #                 )['total_included']                            
 
 
             total_excluded = all_prices['total_excluded']
             total_included = all_prices['total_included']
 
-            _logger.info('total_excluded ' + str(total_excluded))
-            _logger.info('total_included ' + str(total_included))
+            # _logger.info('total_excluded ' + str(total_excluded))
+            # _logger.info('total_included ' + str(total_included))
 
-            total_excluded = price_untaxed
-            total_included = price_taxed    
+            # total_excluded = price_untaxed
+            # total_included = price_taxed    
 
-            _logger.info('total_excluded ' + str(total_excluded))
-            _logger.info('total_included ' + str(total_included))
+            # _logger.info('total_excluded ' + str(total_excluded))
+            # _logger.info('total_included ' + str(total_included))
 
             tax_ids = product.sudo().taxes_id
             if tax_ids :

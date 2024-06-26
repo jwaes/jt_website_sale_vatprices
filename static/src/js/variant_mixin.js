@@ -1,12 +1,12 @@
 /** @odoo-module **/
 
 import VariantMixin from "@website_sale/js/variant_mixin";
-import { renderToFragment } from "@web/core/utils/render";
+// import { renderToFragment } from "@web/core/utils/render";
 
 const originalOnChangeCombination = VariantMixin._onChangeCombination;
 
 VariantMixin._onChangeCombinationVAT = function (ev, $parent, combination) {
-
+    console.log('getting there')
     const $pricePerUom = $parent.find(".vatextrainfo .oe_currency_value");
 
     if ($pricePerUom) {
@@ -35,10 +35,12 @@ VariantMixin._onChangeCombinationVAT = function (ev, $parent, combination) {
     }
     console.log('changing')
     console.log(combination)
-    test = $('span.vatsuffix').append(renderToFragment(
-        'jt_website_sale_vatprices.vatsuffix',
-        combination
-    ));
+    // test = $('span.vatsuffix').append(renderToFragment(
+    //     'jt_website_sale_vatprices.vatsuffix',
+    //     combination
+    // ));
+    $('span.vatsuffix').html("<b>bol</b>")
+    $('span.exclvat').text("fooo")
     console.log(test)
     if (!combination.hastax) {
         $('div.vatextrainfo').hide();
