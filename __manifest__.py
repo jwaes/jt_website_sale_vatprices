@@ -35,6 +35,7 @@
     'assets': {
         'web.assets_frontend': [
             'jt_website_sale_vatprices/static/src/js/**/*',
+            'jt_website_sale_vatprices/static/src/xml/**/*',
         ],
     },        
 }
