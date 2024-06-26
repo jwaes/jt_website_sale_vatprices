@@ -78,6 +78,27 @@ class ProductTemplate(models.Model):
             _logger.info('total_excluded ' + str(total_excluded))
             _logger.info('total_included ' + str(total_included))
 
+            tax_ids = product.sudo().taxes_id
+            if tax_ids :
+                for tid in tax_ids:
+                    _logger.info("tax id " + tid.name)
+
+                tax_ids = fpos.map_tax(tax_ids)
+                taxes = tax_ids.compute_all(
+                    product_price_unit,
+                    currency=pricelist.currency_id,
+                    quantity=quantity_1,
+                    product=product,
+                    partner=partner,
+                )   
+
+                total_excluded = taxes['total_excluded']
+                total_included = taxes['total_included'] 
+
+                _logger.info('total_excluded ' + str(total_excluded))
+                _logger.info('total_included ' + str(total_included))                             
+
+
             applied_tax = ""
             if all_prices['taxes'] and all_prices['taxes'][0]:
                 applied_tax = all_prices['taxes'][0]['name']
