@@ -49,6 +49,7 @@ class ProductTemplate(models.Model):
             quantity_1 = 1.0
             # list_price = product._price_compute('list_price')[product.id]
             product_price_unit = product.with_company(company_id).lst_price
+            _logger.info('product_price_unit ' + str(product_price_unit))
             # price = product.price if pricelist else list_price
             all_prices = taxes.compute_all(product_price_unit, currency=pricelist.currency_id, quantity=quantity_1, product=product, partner=partner)
 
@@ -90,7 +91,7 @@ class ProductTemplate(models.Model):
                     quantity=quantity_1,
                     product=product,
                     partner=partner,
-                )   
+                )
 
                 total_excluded = taxes['total_excluded']
                 total_included = taxes['total_included'] 
