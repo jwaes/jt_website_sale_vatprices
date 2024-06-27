@@ -3,14 +3,14 @@
 
     <template id="product_price" inherit_id="website_sale.product_price">
         <xpath expr="//span[hasclass('oe_price')]" position="after">
-            <span class="vatsuffix font-weight-normal small"><t t-if="combination_info['hastax']">incl. VAT</t></span>            
+            <span class="vatsuffix font-weight-normal small"><t t-if="combination_info['hastax']">inclu. VAT</t></span>            
         </xpath>
         <xpath expr="//h3[1]" position="attributes">
             <attribute name="class" separator=" " add="mb-3 h4" />
         </xpath>        
         <xpath expr="//h3[last()]" position="after">
             <div class="vatextrainfo" t-if="not combination_info['is_dealer_product']">
-                <div class="mb-1">
+                <div class="exclvat mb-1">
                     (<span class="" t-if="combination_info['total_excluded']" t-esc="combination_info['total_excluded']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
                     <span class="font-weight-normal o_not_editable">excl. VAT</span>)
                 </div>                

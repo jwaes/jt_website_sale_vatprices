@@ -2,23 +2,11 @@
 
 import VariantMixin from "@website_sale/js/variant_mixin";
 // import { renderToFragment } from "@web/core/utils/render";
+import "@website_sale/js/website_sale";
 
-const originalOnChangeCombination = VariantMixin._onChangeCombination;
+// const originalOnChangeCombination = VariantMixin._onChangeCombination;
 
 VariantMixin._onChangeCombinationVAT = function (ev, $parent, combination) {
-    console.log('getting there')
-    const $pricePerUom = $parent.find(".vatextrainfo .oe_currency_value");
-
-    if ($pricePerUom) {
-        if (combination.is_combination_possible !== false && combination.total_excluded != 0) {
-            $pricePerUom.parents(".o_base_unit_price_wrapper").removeClass("d-none");
-            $pricePerUom.text(this._priceToStr(combination.total_excluded));
-            $parent.find(".oe_custom_base_unit:first").text(combination.base_unit_name);
-        } else {
-            $pricePerUom.parents(".o_base_unit_price_wrapper").addClass("d-none");
-        }
-    }
-
     let product_id = 0;
     // needed for list view of variants
     if ($parent.find('input.product_id:checked').length) {
@@ -33,20 +21,34 @@ VariantMixin._onChangeCombinationVAT = function (ev, $parent, combination) {
     if (!this.isWebsite || !isMainProduct) {
         return;
     }
+
+
+    const $vatExcl = $parent.find(".exclvat .oe_currency_value")
     console.log('changing')
+    console.log($vatExcl)
     console.log(combination)
-    // test = $('span.vatsuffix').append(renderToFragment(
-    //     'jt_website_sale_vatprices.vatsuffix',
-    //     combination
-    // ));
-    $('span.vatsuffix').html("<b>bol</b>")
-    $('span.exclvat').text("fooo")
-    console.log(test)
+
+    if ($vatExcl) {
+        $vatExcl.text(combination.total_excluded)
+    }
+
     if (!combination.hastax) {
         $('div.vatextrainfo').hide();
     }
 
-    originalOnChangeCombination.apply(this, [ev, $parent, combination]);
+    // originalOnChangeCombination.apply(this, [ev, $parent, combination]);
 };
+
+
+publicWidget.registry.WebsiteSale.include({
+    /**
+     * Adds the vat to the regular _onChangeCombination method
+     * @override
+     */
+    _onChangeCombination: function () {
+        this._super.apply(this, arguments);
+        VariantMixin._onChangeCombinationVAT.apply(this, arguments);
+    },
+});
 
 export default VariantMixin;
