@@ -30,14 +30,14 @@ VariantMixin._onChangeCombinationVAT = function (ev, $parent, combination) {
     // console.log(combination)
 
     if ($vatExcl) {
-        $vatExcl.text(combination.total_excluded)
+        $vatExcl.text(this._priceToStr(combination.total_excluded));
     }
 
     const $appliedTax = $parent.find("#applied_tax")
     console.log($appliedTax)
-    // if ($appliedTax){
-    //     $appliedTax.text(combination.applied_tax)
-    // }
+    if ($appliedTax){
+        $appliedTax.text(combination.applied_tax);
+    }
 
     if (!combination.hastax) {
         $('div.vatextrainfo').hide();
