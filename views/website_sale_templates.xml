@@ -21,10 +21,11 @@
     </template>
 
     <template id="tax_indication" inherit_id="website_sale.tax_indication">
-        <xpath expr="//span[2]/text()" position="before">
+        <xpath expr="//span[2]" position="inside">
             <span id="applied_tax">
                 <t t-if="combination_info['applied_tax']"><t t-esc="combination_info['applied_tax']"/></t>
             </span>
+            VAT Included
         </xpath>
     </template>
 

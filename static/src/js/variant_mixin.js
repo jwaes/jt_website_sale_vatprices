@@ -2,7 +2,7 @@
 
 import VariantMixin from "@website_sale/js/variant_mixin";
 import publicWidget from "@web/legacy/js/public/public_widget";
-import { renderToFragment } from "@web/core/utils/render";
+// import { renderToFragment } from "@web/core/utils/render";
 import "@website_sale/js/website_sale";
 
 // const originalOnChangeCombination = VariantMixin._onChangeCombination;
@@ -34,9 +34,10 @@ VariantMixin._onChangeCombinationVAT = function (ev, $parent, combination) {
     }
 
     const $appliedTax = $parent.find("#applied_tax")
-    if ($appliedTax){
-        $appliedTax.text(combination.applied_tax)
-    }
+    console.log($appliedTax)
+    // if ($appliedTax){
+    //     $appliedTax.text(combination.applied_tax)
+    // }
 
     if (!combination.hastax) {
         $('div.vatextrainfo').hide();
