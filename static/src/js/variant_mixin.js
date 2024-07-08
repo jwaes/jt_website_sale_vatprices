@@ -1,6 +1,7 @@
 /** @odoo-module **/
 
 import VariantMixin from "@website_sale/js/variant_mixin";
+import publicWidget from "@web/legacy/js/public/public_widget";
 // import { renderToFragment } from "@web/core/utils/render";
 import "@website_sale/js/website_sale";
 
