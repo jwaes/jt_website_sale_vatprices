@@ -2,7 +2,7 @@
 
 import VariantMixin from "@website_sale/js/variant_mixin";
 import publicWidget from "@web/legacy/js/public/public_widget";
-// import { renderToFragment } from "@web/core/utils/render";
+import { renderToFragment } from "@web/core/utils/render";
 import "@website_sale/js/website_sale";
 
 // const originalOnChangeCombination = VariantMixin._onChangeCombination;
@@ -25,12 +25,17 @@ VariantMixin._onChangeCombinationVAT = function (ev, $parent, combination) {
 
 
     const $vatExcl = $parent.find(".exclvat .oe_currency_value")
-    console.log('changing')
-    console.log($vatExcl)
-    console.log(combination)
+    // console.log('changing')
+    // console.log($vatExcl)
+    // console.log(combination)
 
     if ($vatExcl) {
         $vatExcl.text(combination.total_excluded)
+    }
+
+    const $appliedTax = $parent.find("#applied_tax")
+    if ($appliedTax){
+        $appliedTax.text(combination.applied_tax)
     }
 
     if (!combination.hastax) {

@@ -2,9 +2,9 @@
 <odoo>
 
     <template id="product_price" inherit_id="website_sale.product_price">
-        <xpath expr="//span[hasclass('oe_price')]" position="after">
-            <span class="vatsuffix font-weight-normal small"><t t-if="combination_info['hastax']">inclu. VAT</t></span>            
-        </xpath>
+        <!-- <xpath expr="//span[hasclass('oe_price')]" position="after">
+            <span class="vatsuffix font-weight-normal small"><t t-if="combination_info['hastax']">incl. VAT</t></span>            
+        </xpath> -->
         <xpath expr="//h3[1]" position="attributes">
             <attribute name="class" separator=" " add="mb-3 h4" />
         </xpath>        
@@ -18,6 +18,14 @@
                 <span class="exclvat o_not_editable"/>
             </div>            
         </xpath>        
+    </template>
+
+    <template id="tax_indication" inherit_id="website_sale.tax_indication">
+        <xpath expr="//span[2]/text()" position="before">
+            <span id="applied_tax">
+                <t t-if="combination_info['applied_tax']"><t t-esc="combination_info['applied_tax']"/></t>
+            </span>
+        </xpath>
     </template>
 
 </odoo>
