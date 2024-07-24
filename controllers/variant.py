@@ -1,3 +1,4 @@
+import logging
 from odoo import http
 from odoo.http import request
 from odoo.addons.website_sale.controllers.variant import WebsiteSaleVariantController
