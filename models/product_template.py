@@ -10,9 +10,10 @@ class ProductTemplate(models.Model):
         res = super()._get_additionnal_combination_info(product_or_template, quantity, date, website)
 
         if not self.env.context.get('website_sale_vatinfo'):
+            _logger.info('NOT found website_sale_vatinfo')
             return res
 
-
+        _logger.info('found website_sale_vatinfo')
         pricelist = website._get_current_pricelist()
         partner = self.env.user.partner_id
         company_id = website.company_id
@@ -24,18 +25,18 @@ class ProductTemplate(models.Model):
             tax_display = self.user_has_groups('account.group_show_line_subtotals_tax_excluded') and 'total_excluded' or 'total_included'
             fpos = self.env['account.fiscal.position'].sudo()._get_fiscal_position(partner)
             if fpos:
-                _logger.debug('fiscal position ' + fpos.name)
+                _logger.info('fiscal position ' + fpos.name)
             else:
-                _logger.debug('fiscal position: false')
+                _logger.info('fiscal position: false')
             product_taxes = product_sudo.taxes_id.filtered(lambda x: x.company_id == company_id)
-            _logger.debug('product_taxes ' + product_taxes.name)
+            _logger.info('product_taxes ' + product_taxes.name)
             taxes = fpos.map_tax(product_taxes)
-            _logger.debug('taxes ' + taxes.name)
+            _logger.info('taxes ' + taxes.name)
 
             quantity_1 = 1.0
 
             product_price_unit = pricelist._get_product_price(product_sudo, currency=pricelist.currency_id, quantity=quantity_1)
-            _logger.debug('product_price_unit ' + str(product_price_unit))
+            _logger.info('product_price_unit ' + str(product_price_unit))
 
             all_prices = taxes.compute_all(product_price_unit, currency=pricelist.currency_id, quantity=quantity_1, product=product_sudo, partner=partner)                   
 
@@ -45,7 +46,7 @@ class ProductTemplate(models.Model):
             tax_ids = product_sudo.taxes_id
             if tax_ids :
                 for tid in tax_ids:
-                    _logger.debug("tax id " + tid.name)
+                    _logger.info("tax id " + tid.name)
 
                 tax_ids = fpos.map_tax(tax_ids)
                 taxes = tax_ids.compute_all(
@@ -59,8 +60,8 @@ class ProductTemplate(models.Model):
                 total_excluded = taxes['total_excluded']
                 total_included = taxes['total_included'] 
 
-                _logger.debug('total_excluded ' + str(total_excluded))
-                _logger.debug('total_included ' + str(total_included))                             
+                _logger.info('total_excluded ' + str(total_excluded))
+                _logger.info('total_included ' + str(total_included))                             
 
 
             applied_tax = ""
@@ -70,7 +71,7 @@ class ProductTemplate(models.Model):
             hastax = False
             if product_sudo.taxes_id:
                 hastax = True     
-                _logger.debug('hastax !')     
+                _logger.info('hastax !')     
 
 
             res['hastax'] = hastax
@@ -111,18 +112,18 @@ class ProductTemplate(models.Model):
     #         tax_display = self.user_has_groups('account.group_show_line_subtotals_tax_excluded') and 'total_excluded' or 'total_included'
     #         fpos = self.env['account.fiscal.position'].sudo()._get_fiscal_position(partner)
     #         if fpos:
-    #             _logger.debug('fiscal position ' + fpos.name)
+    #             _logger.info('fiscal position ' + fpos.name)
     #         else:
-    #             _logger.debug('fiscal position: false')
+    #             _logger.info('fiscal position: false')
     #         product_taxes = product.sudo().taxes_id.filtered(lambda x: x.company_id == company_id)
-    #         _logger.debug('product_taxes ' + product_taxes.name)
+    #         _logger.info('product_taxes ' + product_taxes.name)
     #         taxes = fpos.map_tax(product_taxes)
-    #         _logger.debug('taxes ' + taxes.name)
+    #         _logger.info('taxes ' + taxes.name)
 
     #         quantity_1 = 1.0
 
     #         product_price_unit = pricelist._get_product_price(product, currency=pricelist.currency_id, quantity=quantity_1)
-    #         _logger.debug('product_price_unit ' + str(product_price_unit))
+    #         _logger.info('product_price_unit ' + str(product_price_unit))
 
     #         all_prices = taxes.compute_all(product_price_unit, currency=pricelist.currency_id, quantity=quantity_1, product=product, partner=partner)                   
 
@@ -132,7 +133,7 @@ class ProductTemplate(models.Model):
     #         tax_ids = product.sudo().taxes_id
     #         if tax_ids :
     #             for tid in tax_ids:
-    #                 _logger.debug("tax id " + tid.name)
+    #                 _logger.info("tax id " + tid.name)
 
     #             tax_ids = fpos.map_tax(tax_ids)
     #             taxes = tax_ids.compute_all(
@@ -146,8 +147,8 @@ class ProductTemplate(models.Model):
     #             total_excluded = taxes['total_excluded']
     #             total_included = taxes['total_included'] 
 
-    #             _logger.debug('total_excluded ' + str(total_excluded))
-    #             _logger.debug('total_included ' + str(total_included))                             
+    #             _logger.info('total_excluded ' + str(total_excluded))
+    #             _logger.info('total_included ' + str(total_included))                             
 
 
     #         applied_tax = ""
@@ -157,7 +158,7 @@ class ProductTemplate(models.Model):
     #         hastax = False
     #         if product.taxes_id:
     #             hastax = True     
-    #             _logger.debug('hastax !')                  
+    #             _logger.info('hastax !')                  
 
     #         combination_info.update({
     #             'hastax': hastax,
