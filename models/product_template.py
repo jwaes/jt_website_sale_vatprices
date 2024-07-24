@@ -9,11 +9,11 @@ class ProductTemplate(models.Model):
     def _get_additionnal_combination_info(self, product_or_template, quantity, date, website):
         res = super()._get_additionnal_combination_info(product_or_template, quantity, date, website)
 
-        if not self.env.context.get('website_sale_vatinfo'):
-            _logger.info('NOT found website_sale_vatinfo')
-            return res
+        # if not self.env.context.get('website_sale_vatinfo'):
+        #     _logger.info('NOT found website_sale_vatinfo')
+        #     return res
 
-        _logger.info('found website_sale_vatinfo')
+        # _logger.info('found website_sale_vatinfo')
         pricelist = website._get_current_pricelist()
         partner = self.env.user.partner_id
         company_id = website.company_id
