@@ -68,12 +68,12 @@ class ProductTemplate(models.Model):
                 applied_tax = all_prices['taxes'][0]['name']
 
             hastax = False
-            if product.taxes_id:
+            if product_sudo.taxes_id:
                 hastax = True     
                 _logger.debug('hastax !')     
 
 
-            res['hastax'] =hastax
+            res['hastax'] = hastax
             res['tax'] = product_sudo.taxes_id.display_name,
             res['total_excluded'] = total_excluded
             res['total_included'] = total_included
