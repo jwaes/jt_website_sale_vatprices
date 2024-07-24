@@ -2,10 +2,11 @@
 
 import VariantMixin from "@website_sale/js/variant_mixin";
 import publicWidget from "@web/legacy/js/public/public_widget";
-// import { renderToFragment } from "@web/core/utils/render";
+
+
+
 import "@website_sale/js/website_sale";
 
-// const originalOnChangeCombination = VariantMixin._onChangeCombination;
 
 VariantMixin._onChangeCombinationVAT = function (ev, $parent, combination) {
     let product_id = 0;
@@ -43,7 +44,6 @@ VariantMixin._onChangeCombinationVAT = function (ev, $parent, combination) {
         $('div.vatextrainfo').hide();
     }
 
-    // originalOnChangeCombination.apply(this, [ev, $parent, combination]);
 };
 
 

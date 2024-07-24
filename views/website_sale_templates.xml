@@ -10,9 +10,9 @@
             <attribute name="class" separator=" " add="mb-3 h4" />
         </xpath>
         <xpath expr="//h3[last()]" position="after">
-            <div class="vatextrainfo" t-if="not combination_info['is_dealer_product']">
-                <div class="exclvat mb-1"> (<span class="" t-if="combination_info['total_excluded']"
-                        t-esc="combination_info['total_excluded']"
+            <div class="vatextrainfo" t-if="not is_dealer_product">
+                <div class="exclvat mb-1"> (<span class="" t-if="total_excluded"
+                        t-esc="total_excluded"
                         t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
                     <span
                         class="font-weight-normal o_not_editable">excl. VAT</span>) </div>
@@ -26,8 +26,8 @@
     <template id="tax_indication" inherit_id="website_sale.tax_indication">
         <xpath expr="//span[2]" position="inside">
             <span id="applied_tax">
-                <t t-if="combination_info['applied_tax']">
-                    (<t t-esc="combination_info['applied_tax']" />)
+                <t t-if="applied_tax">
+                    (<t t-esc="applied_tax" />)
                 </t>
             </span>            
         </xpath>
