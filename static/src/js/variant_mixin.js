@@ -23,19 +23,19 @@ VariantMixin._onChangeCombinationVAT = function (ev, $parent, combination) {
     if (!this.isWebsite || !isMainProduct) {
         return;
     }
+    console.log("updating VAT ");
 
-
-    const $vatExcl = $parent.find(".exclvat .oe_currency_value")
-    // console.log('changing')
-    // console.log($vatExcl)
-    // console.log(combination)
+    const $vatExcl = $parent.find(".exclvat .oe_currency_value");
+    console.log('changing');
+    console.log($vatExcl);
+    console.log(combination);
 
     if ($vatExcl) {
         $vatExcl.text(this._priceToStr(combination.total_excluded));
     }
 
-    const $appliedTax = $parent.find("#applied_tax")
-    console.log($appliedTax)
+    const $appliedTax = $parent.find("#applied_tax");
+    console.log($appliedTax);
     if ($appliedTax){
         $appliedTax.text(combination.applied_tax);
     }
