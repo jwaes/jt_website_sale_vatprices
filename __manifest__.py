@@ -28,10 +28,6 @@
         # 'security/ir.model.access.csv',
         'views/website_sale_templates.xml',
     ],
-    # only loaded in demonstration mode
-    'demo': [
-        # 'demo/demo.xml',
-    ],
     'assets': {
         'web.assets_frontend': [
             'jt_website_sale_vatprices/static/src/js/**/*',
