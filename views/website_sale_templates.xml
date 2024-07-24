@@ -11,7 +11,7 @@
         </xpath>
         <xpath expr="//h3[last()]" position="after">
             <div class="vatextrainfo" t-if="not is_dealer_product">
-                <div class="exclvat mb-1"> (<span class="" t-if="total_excluded"
+                <div class="exclvat mb-1"> (<span class=""
                         t-esc="total_excluded"
                         t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
                     <span
