@@ -7,13 +7,14 @@
         VAT</t></span>            
         </xpath> -->
 
-        <t t-set="combination" t-value="product.with_context(website_sale_vatinfo=True)._get_first_possible_combination()"/>
 
         <xpath expr="//h3[1]" position="attributes">
             <attribute name="class" separator=" " add="mb-3 h4" />
         </xpath>
         <xpath expr="//h3[last()]" position="after">
             <div class="vatextrainfo" t-if="not combination_info['is_dealer_product']">
+                
+                <t t-set="combination" t-value="product.with_context(website_sale_vatinfo=True)._get_first_possible_combination()"/>
                 <div class="exclvat mb-1"> (<span class="" t-if="combination_info['total_excluded']"
                         t-esc="combination_info['total_excluded']"
                         t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
