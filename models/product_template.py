@@ -10,10 +10,9 @@ class ProductTemplate(models.Model):
         res = super()._get_additionnal_combination_info(product_or_template, quantity, date, website)
 
         if not self.env.context.get('website_sale_vatinfo'):
-            _logger.info('NOT found website_sale_vatinfo')
             return res
 
-        _logger.info('found website_sale_vatinfo')
+        _logger.debug('found website_sale_vatinfo')
         pricelist = website._get_current_pricelist()
         partner = self.env.user.partner_id
         company_id = website.company_id
@@ -25,13 +24,13 @@ class ProductTemplate(models.Model):
             tax_display = self.user_has_groups('account.group_show_line_subtotals_tax_excluded') and 'total_excluded' or 'total_included'
             fpos = self.env['account.fiscal.position'].sudo()._get_fiscal_position(partner)
             if fpos:
-                _logger.info('fiscal position ' + fpos.name)
+                _logger.debug('fiscal position ' + fpos.name)
             else:
-                _logger.info('fiscal position: false')
+                _logger.debug('fiscal position: false')
             product_taxes = product_sudo.taxes_id.filtered(lambda x: x.company_id == company_id)
-            _logger.info('product_taxes ' + product_taxes.name)
+            _logger.debug('product_taxes ' + product_taxes.name)
             taxes = fpos.map_tax(product_taxes)
-            _logger.info('taxes ' + taxes.name)
+            _logger.debug('taxes ' + taxes.name)
 
             quantity_1 = 1.0
 
@@ -46,7 +45,7 @@ class ProductTemplate(models.Model):
             tax_ids = product_sudo.taxes_id
             if tax_ids :
                 for tid in tax_ids:
-                    _logger.info("tax id " + tid.name)
+                    _logger.debug("tax id " + tid.name)
 
                 tax_ids = fpos.map_tax(tax_ids)
                 taxes = tax_ids.compute_all(
@@ -60,8 +59,8 @@ class ProductTemplate(models.Model):
                 total_excluded = taxes['total_excluded']
                 total_included = taxes['total_included'] 
 
-                _logger.info('total_excluded ' + str(total_excluded))
-                _logger.info('total_included ' + str(total_included))                             
+                _logger.debug('total_excluded ' + str(total_excluded))
+                _logger.debug('total_included ' + str(total_included))                             
 
 
             applied_tax = ""
@@ -71,7 +70,7 @@ class ProductTemplate(models.Model):
             hastax = False
             if product_sudo.taxes_id:
                 hastax = True     
-                _logger.info('hastax !')     
+                _logger.debug('hastax !')     
 
 
             res['hastax'] = hastax

@@ -11,5 +11,5 @@ class WebsiteSaleNowVatVariantController(WebsiteSaleVariantController):
     @http.route()
     def get_combination_info_website(self, *args, **kwargs):
         request.update_context(website_sale_vatinfo=True)
-        _logger.info('ENTERING WebsiteSaleNowVatVariantController')
+        _logger.debug('ENTERING WebsiteSaleNowVatVariantController')
         return super().get_combination_info_website(*args, **kwargs)
