@@ -34,7 +34,7 @@ class ProductTemplate(models.Model):
 
             quantity_1 = 1.0
 
-            product_price_unit = pricelist._get_product_price(product_sudo, currency=pricelist.currency_id, quantity=quantity_1)
+            product_price_unit = pricelist._get_product_price(product_sudo, quantity=quantity_1)
             _logger.info('product_price_unit ' + str(product_price_unit))
 
             all_prices = taxes.compute_all(product_price_unit, currency=pricelist.currency_id, quantity=quantity_1, product=product_sudo, partner=partner)                   
