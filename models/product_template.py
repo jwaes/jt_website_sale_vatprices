@@ -21,7 +21,7 @@ class ProductTemplate(models.Model):
             product_sudo = product_or_template.sudo()
 
 
-            tax_display = self.user_has_groups('account.group_show_line_subtotals_tax_excluded') and 'total_excluded' or 'total_included'
+            tax_display = self.env.user.has_groups('account.group_show_line_subtotals_tax_excluded') and 'total_excluded' or 'total_included'
             fpos = self.env['account.fiscal.position'].sudo()._get_fiscal_position(partner)
             if fpos:
                 _logger.debug('fiscal position ' + fpos.name)
@@ -108,7 +108,7 @@ class ProductTemplate(models.Model):
     #         partner = self.env.user.partner_id
     #         company_id = current_website.company_id
 
-    #         tax_display = self.user_has_groups('account.group_show_line_subtotals_tax_excluded') and 'total_excluded' or 'total_included'
+    #         tax_display = self.env.user.has_groups('account.group_show_line_subtotals_tax_excluded') and 'total_excluded' or 'total_included'
     #         fpos = self.env['account.fiscal.position'].sudo()._get_fiscal_position(partner)
     #         if fpos:
     #             _logger.info('fiscal position ' + fpos.name)
